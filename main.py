@@ -52,7 +52,9 @@ async def fetch_prices(db: Session):
                     if price < last_price.price:
                         message = f"🔥 Price Drop Alert! {target.title} is now R$ {price}!\nCheck here: {url}"
                         send_telegram_message(message)
-                
+                    elif price > last_price.price:
+                        message = f"🧊 Price Increate Alert! {target.title} is now R$ {price}!\nCheck here: {url}"
+                        send_telegram_message(message)
                 new_price = PriceHistory(
                     target_id=target.id,
                     price_date=datetime.now().date(),
